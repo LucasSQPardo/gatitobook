@@ -4,7 +4,7 @@ import { UsuarioExisteService } from './usuario-existe.service';
 import { NovoUsuarioService } from './novo-usuario.service';
 import { NovoUsuario } from './novo-usuario';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { minusculoValidator } from './minusculo.validator';
 import { usuarioSenhaIguaisValidator } from './usuario-senha-iguais.validator';
 
@@ -15,7 +15,6 @@ import { usuarioSenhaIguaisValidator } from './usuario-senha-iguais.validator';
 })
 export class NovoUsuarioComponent implements OnInit {
   novoUsuarioForm!: FormGroup;
-
   constructor(
     private formBuilder: FormBuilder,
     private service: NovoUsuarioService,
@@ -36,6 +35,8 @@ export class NovoUsuarioComponent implements OnInit {
         [this.usuarioExisteService.usuarioJaExiste()], //Asynchronous validation
       ],
       password: [''],
+
+      listaUsuarios: this.formBuilder.array
     },
     {
       validators: [usuarioSenhaIguaisValidator]
